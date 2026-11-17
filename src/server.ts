@@ -83,7 +83,7 @@ app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
 app.post("/api/v1/users", async (req: Request, res: Response) => {
   try {
     const { name, email, age, password } = await req.body;
-    const result = pool.query(
+    const result = await pool.query(
       `
             INSERT INTO USERS (name,email,age,password) VALUES
             ($1,$2,$3,$4) RETURNING *
@@ -93,7 +93,37 @@ app.post("/api/v1/users", async (req: Request, res: Response) => {
     res.status(201).json({
       success: true,
       message: "User created successfullY",
-      data: (await result).rows[0],
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error,
+    });
+  }
+});
+
+//* Update User
+app.put("/api/v1/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, email, password } = req.body;
+    const result = await pool.query(
+      `
+            UPDATE users
+            SET
+            name = COALESCE($1,name),
+            email = COALESCE($2,email),
+            password = COALESCE($3, password)
+            WHERE id = $4 RETURNING *
+        `,
+      [name ?? null, email ?? null, password ?? null, id],
+    );
+    res.status(200).json({
+      success: true,
+      message: "User created successfullY",
+      data:  result.rows[0],
     });
   } catch (error: any) {
     res.status(500).json({
