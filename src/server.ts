@@ -4,16 +4,16 @@ import express, {
   type Response,
 } from "express";
 import { Pool } from "pg";
+import config from "./config";
 
 const app: Application = express();
-const port = 3000;
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const pool = new Pool({
-  connectionString:
-    "postgresql://neondb_owner:npg_6LKYgcG0CPBf@ep-crimson-pond-bdjcxbq2-pooler.c-8.us-east-2.aws.neon.tech/neondb?sslmode=false&channel_binding=require",
+  connectionString: config.connection_string,
 });
 
 const initDB = async () => {
@@ -149,7 +149,7 @@ app.delete("/api/v1/users/:id", async (req: Request, res: Response) => {
         success: false,
         message: "User not found",
       });
-      return 
+      return
     }
     res.status(200).json({
       success: true,
@@ -164,7 +164,7 @@ app.delete("/api/v1/users/:id", async (req: Request, res: Response) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(config.port, () => {
   initDB();
-  console.log(`Server is listening on port: ${port}`);
+  console.log(`Server is listening on port: ${config.port}`);
 });
