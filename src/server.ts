@@ -35,13 +35,51 @@ const initDB = async () => {
   }
 };
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({
-    success: true,
-    message: "This is root route",
-  });
+//* Get All Users
+app.get("/api/v1/users", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`
+        SELECT * FROM users
+    `);
+    res.status(200).json({
+      success: true,
+      message: "Successfully retrieved all users",
+      data: result.rows,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error,
+    });
+  }
 });
 
+//* Get Single User
+app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      `
+            SELECT * FROM users WHERE id=$1
+        `,
+      [id],
+    );
+    res.status(200).json({
+      success: true,
+      message: "Successfully retrieved  user",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error,
+    });
+  }
+});
+
+//* Create Single User
 app.post("/api/v1/users", async (req: Request, res: Response) => {
   try {
     const { name, email, age, password } = await req.body;
