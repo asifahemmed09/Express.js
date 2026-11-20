@@ -8,8 +8,6 @@ build/
 out/
 
 # Environment variables
-.env
-.env.*
 !.env.example
 
 # Logs
@@ -42,7 +40,6 @@ uploads/*
 !uploads/.gitkeep
 
 # IDEs and editors
-.vscode/*
 !.vscode/extensions.json
 .idea/
 *.swp
@@ -69,3 +66,4 @@ temp/
 # Miscellaneous
 *.bak
 *.tmp
+config.bat
