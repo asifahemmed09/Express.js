@@ -7,7 +7,6 @@ export const pool = new Pool({
 
 const initDB = async () => {
   try {
-    console.log("Database connected successfully");
     await pool.query(`
             CREATE TABLE IF NOT EXISTS users(
             id SERIAL PRIMARY KEY,
@@ -20,10 +19,24 @@ const initDB = async () => {
             updated_at TIMESTAMP DEFAULT NOW()
             )
             `);
+    await pool.query(`
+            CREATE TABLE IF NOT EXISTS profile(
+            id SERIAL PRIMARY KEY,
+            user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+
+            bio TEXT,
+            address TEXT,
+            phone VARCHAR(15),
+            gender VARCHAR(15),
+
+            created_at TIMESTAMP DEFAULT NOW(),
+            updated_at TIMESTAMP DEFAULT NOW()
+    )
+      `);
+    console.log("Database connected successfully");
   } catch (error) {
     console.log(error);
   }
 };
 
-
-export default initDB
+export default initDB;
