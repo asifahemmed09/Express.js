@@ -4,6 +4,7 @@ import express, {
 import { userRouter } from "./modules/user/user.route";
 import { profileRouter } from "./modules/profile/profile.route";
 import { authRouter } from "./modules/auth/auth.route";
+import logger from "./middlewares/logger";
 
 
 
@@ -13,6 +14,8 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//* custom middleware
+app.use(logger)
 
 //* routes
 app.use("/api/v1/users", userRouter)
