@@ -2,3 +2,31 @@
 URL -> /api/v1/users | METHOD -> GET | TIME -> 1795518296518
 
 URL -> /api/v1/users/6 | METHOD -> GET | TIME -> 1795518332469
+
+URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795520383316
+
+URL -> /api/v1/users | METHOD -> POST | TIME -> 1795520404216
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795520419567
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795520609049
+
+URL -> /api/v1/auth/login | METHOD -> GET | TIME -> 1795541932093
+
+URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795541947756
+
+URL -> /api/v1/users | METHOD -> POST | TIME -> 1795541962147
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795541977011
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795541990210
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795545265772
+
+URL -> /api/v1/auth/login | METHOD -> GET | TIME -> 1795545293248
+
+URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795545298566
+
+URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795545329547
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795545340529
