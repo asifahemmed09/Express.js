@@ -30,3 +30,23 @@ URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795545298566
 URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795545329547
 
 URL -> /api/v1/users | METHOD -> GET | TIME -> 1795545340529
+
+URL -> /api/v1/users | METHOD -> POST | TIME -> 1795725154303
+
+URL -> /api/v1/users | METHOD -> POST | TIME -> 1795725188099
+
+URL -> /api/v1/users | METHOD -> POST | TIME -> 1795725546586
+
+URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795725594964
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795725651152
+
+URL -> /api/v1/users/1 | METHOD -> GET | TIME -> 1795725692203
+
+URL -> /api/v1/auth/login | METHOD -> GET | TIME -> 1795725708565
+
+URL -> /api/v1/auth/login | METHOD -> POST | TIME -> 1795725714091
+
+URL -> /api/v1/users | METHOD -> GET | TIME -> 1795725762906
+
+URL -> /api/v1/users/2 | METHOD -> GET | TIME -> 1795725772849

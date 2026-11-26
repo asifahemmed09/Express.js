@@ -22,16 +22,16 @@ const getSingleUserFromDB = async (id: string) => {
 
 //* create user
 const createUserIntoDB = async (payLoad: IUser) => {
-  const { name, email, age, password } = payLoad;
-  const hashed_password =  await bcrypt.hash(password, 10)
+  const { name, email, age, password, role } = payLoad;
+  const hashed_password = await bcrypt.hash(password, 10);
   const result = await pool.query(
     `
-            INSERT INTO USERS (name,email,age,password) VALUES
-            ($1,$2,$3,$4) RETURNING *
+            INSERT INTO USERS (name,email,age,password,role) VALUES
+            ($1,$2,$3,$4,COALESCE($5,'user')) RETURNING *
         `,
-    [name, email, age, hashed_password],
+    [name, email, age, hashed_password, role],
   );
-  delete result.rows[0].password
+  delete result.rows[0].password;
   return result;
 };
 
@@ -47,7 +47,13 @@ const updateUserIntoDB = async (payLoad: Partial<IUser>, id: string) => {
             age = COALESCE($4, age)
             WHERE id = $5 RETURNING *
         `,
-    [payLoad.name ?? null, payLoad.email ?? null, payLoad.password ?? null, payLoad.age ?? null, id],
+    [
+      payLoad.name ?? null,
+      payLoad.email ?? null,
+      payLoad.password ?? null,
+      payLoad.age ?? null,
+      id,
+    ],
   );
   return result;
 };
@@ -59,7 +65,7 @@ const deleteUserFromDB = async (id: string) => {
         `,
     [id],
   );
-  return result
+  return result;
 };
 
 export const userService = {
